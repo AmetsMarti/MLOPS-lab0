@@ -1,0 +1,4 @@
+lint.txt
+report.typ
+.pytest_cache/
+__pycache__
