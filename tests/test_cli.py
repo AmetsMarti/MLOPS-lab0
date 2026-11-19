@@ -32,7 +32,9 @@ def test_clean_remove_missing(runner):
 
 
 def test_clean_fill_missing(runner):
-    result = runner.invoke(cli, ["clean", "fill-missing", '[1, null, ""]', "--value", "0"])
+    result = runner.invoke(
+        cli, ["clean", "fill-missing", '[1, null, ""]', "--value", "0"]
+    )
     assert result.exit_code == 0
     assert parse_output(result.output) == [1, 0, 0]
 
@@ -49,7 +51,12 @@ def test_numeric_standardize(runner):
     result = runner.invoke(cli, ["numeric", "standardize", "[1, 2, 3, 4]"])
     assert result.exit_code == 0
     assert parse_output(result.output) == pytest.approx(
-        [-1.3416407864998738, -0.4472135954999579, 0.4472135954999579, 1.3416407864998738]
+        [
+            -1.3416407864998738,
+            -0.4472135954999579,
+            0.4472135954999579,
+            1.3416407864998738,
+        ]
     )
 
 
@@ -88,7 +95,13 @@ def test_text_remove_punctuation(runner):
 def test_text_remove_stop_words(runner):
     result = runner.invoke(
         cli,
-        ["text", "remove-stop-words", "the quick brown fox", "--stop-words", '["the", "fox"]'],
+        [
+            "text",
+            "remove-stop-words",
+            "the quick brown fox",
+            "--stop-words",
+            '["the", "fox"]',
+        ],
     )
     assert result.exit_code == 0
     assert result.output.strip() == "quick brown"
@@ -100,7 +113,9 @@ def test_struct_shuffle(runner):
     values = parse_output(result.output)
     assert sorted(values) == [1, 2, 3, 4]
 
-    result_repeat = runner.invoke(cli, ["struct", "shuffle", "[1, 2, 3, 4]", "--seed", "1"])
+    result_repeat = runner.invoke(
+        cli, ["struct", "shuffle", "[1, 2, 3, 4]", "--seed", "1"]
+    )
     assert parse_output(result_repeat.output) == values
 
 

@@ -103,8 +103,22 @@ def clean_fill_missing(values, filler):
 
 @numeric.command("normalize")
 @click.argument("values")
-@click.option("--min", "new_min", type=float, default=0.0, show_default=True, help="Minimum value of the new range.")
-@click.option("--max", "new_max", type=float, default=1.0, show_default=True, help="Maximum value of the new range.")
+@click.option(
+    "--min",
+    "new_min",
+    type=float,
+    default=0.0,
+    show_default=True,
+    help="Minimum value of the new range.",
+)
+@click.option(
+    "--max",
+    "new_max",
+    type=float,
+    default=1.0,
+    show_default=True,
+    help="Maximum value of the new range.",
+)
 def numeric_normalize(values, new_min, new_max):
     """Normalize numerical values to a new range."""
     click.echo(preprocessing.normalize_min_max(_parse_list(values), new_min, new_max))
@@ -119,8 +133,22 @@ def numeric_standardize(values):
 
 @numeric.command("clip")
 @click.argument("values")
-@click.option("--min", "minimum", type=float, default=0.0, show_default=True, help="Minimum value to clip.")
-@click.option("--max", "maximum", type=float, default=1.0, show_default=True, help="Maximum value to clip.")
+@click.option(
+    "--min",
+    "minimum",
+    type=float,
+    default=0.0,
+    show_default=True,
+    help="Minimum value to clip.",
+)
+@click.option(
+    "--max",
+    "maximum",
+    type=float,
+    default=1.0,
+    show_default=True,
+    help="Maximum value to clip.",
+)
 def numeric_clip(values, minimum, maximum):
     """Clip numerical values to a range."""
     click.echo(preprocessing.clip_values(_parse_list(values), minimum, maximum))

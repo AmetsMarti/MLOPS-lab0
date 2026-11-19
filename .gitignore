@@ -1,4 +1,8 @@
-lint.txt
-report.typ
 .pytest_cache/
 __pycache__
+black.txt
+pylint.txt
+pytest.txt
+lint.txt
+report.typ
+basic-report/

@@ -57,7 +57,12 @@ def test_normalize_min_max(values, new_min, new_max, expected):
 def test_standardize_z_score(numbers):
     result = preprocessing.standardize_z_score(numbers)
     assert result == pytest.approx(
-        [-1.3416407864998738, -0.4472135954999579, 0.4472135954999579, 1.3416407864998738]
+        [
+            -1.3416407864998738,
+            -0.4472135954999579,
+            0.4472135954999579,
+            1.3416407864998738,
+        ]
     )
     assert preprocessing.standardize_z_score([2, 2, 2]) == [0.0, 0.0, 0.0]
 
@@ -70,7 +75,9 @@ def test_standardize_z_score(numbers):
     ],
 )
 def test_clip_values(values, minimum, maximum, expected):
-    assert preprocessing.clip_values(values, minimum, maximum) == pytest.approx(expected)
+    assert preprocessing.clip_values(values, minimum, maximum) == pytest.approx(
+        expected
+    )
 
 
 def test_convert_to_integers():
@@ -100,7 +107,18 @@ def test_tokenize(text_value, expected):
 
 
 def test_remove_punctuation():
-    assert preprocessing.remove_punctuation("Hello, World! It's #1.") == "Hello World Its 1"
+    assert (
+        preprocessing.remove_punctuation("Hello, World! It's #1.")
+        == "Hello World Its 1"
+    )
+
+
+def test_select_alphanumeric_and_spaces():
+    assert (
+        preprocessing.select_alphanumeric_and_spaces("Hello, World! 123")
+        == "Hello World 123"
+    )
+    assert preprocessing.select_alphanumeric_and_spaces("A_b-c") == "Abc"
 
 
 @pytest.mark.parametrize(
